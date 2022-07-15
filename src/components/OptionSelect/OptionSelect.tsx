@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import React from 'react';
 
 import styles from './OptionSelect.module.css';
 
@@ -22,6 +21,7 @@ const OptionSelect = ({
       className={classNames(styles.container, { [styles.disabled]: disabled })}
     >
       <button
+        disabled={disabled}
         type="button"
         className={classNames(styles.button, {
           [styles.selected]: value === OPTIONS.yes,
@@ -34,6 +34,7 @@ const OptionSelect = ({
         Yes
       </button>
       <button
+        disabled={disabled}
         type="button"
         className={classNames(styles.button, {
           [styles.selected]: value === OPTIONS.no,

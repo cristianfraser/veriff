@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { useFetchChecksQuery } from '../../api';
 import Button from '../Button/Button';
@@ -79,6 +79,8 @@ export default function ChecksForm({
   ) : (
     <form onSubmit={handleSubmit}>
       {sortedChecks.map((check, index) => {
+        // if there's a check with lower priority that
+        // isn't marked as 'yes' this check will be disabled
         const disabled = checks
           .filter((c) => c.priority < check.priority)
           .some((c) => inputs[c.id] !== OPTIONS.yes);

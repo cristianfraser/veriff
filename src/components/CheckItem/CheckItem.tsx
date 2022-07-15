@@ -1,5 +1,4 @@
 import classNames from 'classnames';
-import React from 'react';
 import OptionSelect from '../OptionSelect/OptionSelect';
 
 import styles from './CheckItem.module.css';
