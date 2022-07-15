@@ -2,13 +2,14 @@ import { useEffect } from 'react';
 
 import { useSubmitCheckResults } from './api';
 import ChecksForm from './components/ChecksForm/ChecksForm';
+import { OPTIONS } from './components/OptionSelect/OptionSelect';
 
 import './styles.css';
 
 export default function App() {
   const submit = useSubmitCheckResults();
 
-  const handleSubmit = (inputs: any) => {
+  const handleSubmit = (inputs: { checkId: string; value: OPTIONS }[]) => {
     return submit.mutate(inputs);
   };
 

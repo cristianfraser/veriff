@@ -28,7 +28,7 @@ const CheckItem = ({
       })}
       onClick={setActive}
     >
-      <p className={styles.description}>{check.description}</p>
+      <label className={styles.description}>{check.description}</label>
       <div>
         <OptionSelect
           onChange={(value) => {
