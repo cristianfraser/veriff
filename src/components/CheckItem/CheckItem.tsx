@@ -1,5 +1,6 @@
 import classNames from 'classnames';
-import OptionSelect from '../OptionSelect/OptionSelect';
+import { Check } from '../../types';
+import OptionSelect, { OPTIONS } from '../OptionSelect/OptionSelect';
 
 import styles from './CheckItem.module.css';
 
@@ -11,9 +12,9 @@ const CheckItem = ({
   setActive,
   isActive,
 }: {
-  check: any;
+  check: Check;
   disabled: boolean;
-  onChange: (name: string, value: string) => void;
+  onChange: (name: string, value: OPTIONS) => void;
   setActive: () => void;
   value?: string;
   isActive: boolean;

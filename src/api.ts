@@ -1,13 +1,9 @@
 import { useMutation, useQuery } from 'react-query';
-
-type Check = {
-  id: number;
-  priority: number;
-  description: string;
-};
+import { OPTIONS } from './components/OptionSelect/OptionSelect';
+import { Check } from './types';
 
 export function fetchChecks() {
-  return new Promise((resolve, reject) =>
+  return new Promise<Check[]>((resolve, reject) =>
     setTimeout(
       () =>
         process.env.NODE_ENV === 'test' || Math.random() <= 0.8
@@ -40,10 +36,7 @@ export function fetchChecks() {
 }
 
 export const useFetchChecksQuery = () => {
-  const { data, ...query } = useQuery<unknown, unknown, Check[]>(
-    'fetch-checks',
-    fetchChecks
-  );
+  const { data, ...query } = useQuery<Check[]>('fetch-checks', fetchChecks);
 
   return {
     checks: data || [],
@@ -56,7 +49,12 @@ export const useFetchChecksQuery = () => {
  * @param {string} results[].checkId - Check id
  * @param {string} results[].result - Result value (yes / no)
  */
-export function submitCheckResults(results: { [key: string]: string }) {
+export function submitCheckResults(
+  results: {
+    checkId: string;
+    value: OPTIONS;
+  }[]
+) {
   return new Promise((resolve, reject) =>
     setTimeout(
       () =>
@@ -67,9 +65,11 @@ export function submitCheckResults(results: { [key: string]: string }) {
 }
 
 export const useSubmitCheckResults = () => {
-  const mutation = useMutation((data: { [key: string]: string }) => {
-    return submitCheckResults(data);
-  });
+  const mutation = useMutation(
+    (data: { checkId: string; value: OPTIONS }[]) => {
+      return submitCheckResults(data);
+    }
+  );
 
   return mutation;
 };

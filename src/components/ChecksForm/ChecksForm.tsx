@@ -11,18 +11,23 @@ export default function ChecksForm({
   onSubmit,
   disabled,
 }: {
-  onSubmit: (inputs: any) => void;
+  onSubmit: (
+    inputs: {
+      checkId: string;
+      value: OPTIONS;
+    }[]
+  ) => void;
   disabled: boolean;
 }) {
   const { checks, isLoading } = useFetchChecksQuery();
-  const [inputs, setInputs] = useState({} as { [x: string]: any });
+  const [inputs, setInputs] = useState({} as { [x: string]: OPTIONS });
   const [activeIndex, setActive] = useState(-1);
 
   const sortedChecks = [...checks].sort(
     (checkA, checkB) => checkA.priority - checkB.priority
   );
 
-  const handleOptionSelect = (name: string, value: string) => {
+  const handleOptionSelect = (name: string, value: OPTIONS) => {
     setInputs((values) => ({
       ...values,
       [name]: value,
@@ -37,7 +42,7 @@ export default function ChecksForm({
   });
 
   const handleKeyPress = useCallback(
-    (event: any) => {
+    (event: KeyboardEvent) => {
       if (event.key === 'ArrowDown') {
         setActive((prev) => (prev < enabledChecks.length - 1 ? prev + 1 : 0));
       } else if (event.key === 'ArrowUp') {
@@ -63,10 +68,21 @@ export default function ChecksForm({
     return () => document.removeEventListener('keydown', handleKeyPress);
   }, [checks.length, activeIndex, handleKeyPress]);
 
-  const handleSubmit = (event: any) => {
+  const handleSubmit: React.FormEventHandler<HTMLFormElement> = (event) => {
     event.preventDefault();
 
-    onSubmit(inputs);
+    const res = [] as {
+      checkId: string;
+      value: OPTIONS;
+    }[];
+    Object.entries(inputs).forEach(([checkId, value]) => {
+      res.push({
+        checkId,
+        value,
+      });
+    });
+
+    onSubmit(res);
   };
 
   const enableSubmit =
