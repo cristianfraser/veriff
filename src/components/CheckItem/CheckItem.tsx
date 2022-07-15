@@ -20,6 +20,7 @@ const CheckItem = ({
 }) => {
   return (
     <fieldset
+      data-testid="check-item"
       className={classNames(styles.container, {
         [styles.active]: isActive,
         [styles.disabled]: disabled,
