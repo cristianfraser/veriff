@@ -1,0 +1,8 @@
+.submitContainer {
+  display: flex;
+  margin-top: 30px;
+}
+
+.submit {
+  margin-left: auto;
+}

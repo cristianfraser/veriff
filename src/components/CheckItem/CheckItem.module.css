@@ -1,0 +1,21 @@
+.container {
+  padding: 8px 10px;
+  cursor: default;
+}
+
+.container.disabled {
+  opacity: 0.3;
+}
+
+.container:not(.disabled):hover {
+  background-color: var(--hover-color);
+}
+
+.description {
+  margin-bottom: 4px;
+}
+
+.active:not(.disabled),
+.active:not(.disabled):hover {
+  background-color: var(--highlight-color);
+}

@@ -1,0 +1,51 @@
+.container {
+  display: inline-flex;
+}
+
+.container .button:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.container .button + .button {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-left: 0;
+}
+
+.button {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 25px;
+  letter-spacing: 0.4px;
+  text-align: center;
+  user-select: none;
+  border: 1px solid var(--primary-color);
+  background-color: white;
+  color: var(--primary-color);
+
+  position: relative;
+  height: 25px;
+  width: 50px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.button:hover {
+  background-color: var(--highlight-color);
+}
+
+.button.selected {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.button.disabled {
+  border-color: #978f8f;
+  pointer-events: none;
+  color: inherit;
+}
+
+.button.selected.disabled {
+  background-color: #a7a7bb;
+}
